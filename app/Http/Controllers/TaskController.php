@@ -33,7 +33,7 @@ class TaskController extends Controller
     }
 
     public function create(int $id, CreateTask $request){
-      $current_follder = Folder::find($id);
+      $current_folder = Folder::find($id);
 
       $task = new Task();
       $task->title = $request->title;
