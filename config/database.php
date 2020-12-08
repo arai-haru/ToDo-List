@@ -91,6 +91,12 @@ return [
             'prefix_indexes' => true,
         ],
 
+        'sqlite_testing' =>[
+          'driver' => 'sqlite',
+          'databese' => ':memory',
+          'prefix' => '',
+        ],
+
     ],
 
     /*
