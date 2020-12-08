@@ -25,14 +25,14 @@ class TaskTest extends TestCase
     //     $response->assertStatus(200);
     // }
 
-    public function setUp(){
+    public function setUp() :void {
       parent::setUp();
 
       //テストケース実行前にフォルダデータを作成する
       $this->seed('FoldersTableSeeder');
     }
 
-    public function due_date_should_be_date(){
+    public function test_due_date_should_be_date(){
       $response = $this->post('/folders/1/tasks/create',[
         'title' => 'Sample task',
         'due_date' => 123,
@@ -43,7 +43,7 @@ class TaskTest extends TestCase
       ]);
     }
 
-    public function due_date_should_not_be_past(){
+    public function test_due_date_should_not_be_past(){
       $response = $this->post('/folders/1/tasks/create',[
         'title' => 'Sample task',
         'due_date' => Carbon::yesterday()->format('Y/m/d'),
