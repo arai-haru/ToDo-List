@@ -2,10 +2,11 @@
 
 namespace App\Http\Requests;
 
-use App\Task;
-use Illuminate\Foundation\Http\FormRequest;
+use App\Models\Task;
+// use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class EditTask extends FormRequest
+class EditTask extends CreateTask
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,14 +25,12 @@ class EditTask extends FormRequest
      */
     public function rules()
     {
-        return [
-          $rule = parent::rules();
+        $rule = parent::rules();
 
-          $status_rule = Rule::in(array_keys(Task::STATUS));
+        $status_rule = Rule::in(array_keys(Task::STATUS));
 
-          return $rule + [
-            'status' => 'required|'. $status_rule,
-          ];
+        return $rule + [
+          'status' => 'required|'. $status_rule,
         ];
     }
 
