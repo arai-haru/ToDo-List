@@ -51,16 +51,20 @@ class TaskController extends Controller
       ]);
     }
 
-    public function showEditForm(Folder $folder,int $task_id){
-      $task = Task::find($task_id);
+    public function showEditForm(Folder $folder,Task $task){
+      $this->checkRelation($folder,$task);
+
+      // $task = Task::find($task_id);
 
       return view('tasks/edit',[
         'task' => $task,
       ]);
     }
 
-    public function edit(Folder $folder,int $task_id,EditTask $request){
-      $task = Task::find($task_id);
+    public function edit(Folder $folder,Task $task,EditTask $request){
+      $this->checkRelation($folder,$task);
+
+      // $task = Task::find($task_id);
 
       $task->title = $request->title;
       $task->status = $request->status;
@@ -70,5 +74,11 @@ class TaskController extends Controller
       return redirect()->route('tasks.index',[
         'folder' => $task->folder_id,
       ]);
+    }
+
+    public function checkRelation(Folder $folder,Task $task){
+      if($folder->id !== $task->folder_id){
+        abort(404);
+      }
     }
 }
