@@ -14,9 +14,6 @@ class TaskController extends Controller
     public function index(Folder $folder){
       //全てのフォルダを取得
       // $folders = Folder::all();
-      if(Auth::user()->id !== $folder->user_id){
-        abort(403);
-      }
 
       //ユーザのフォルダを取得する
       $folders = Auth::user()->folders()->get();
