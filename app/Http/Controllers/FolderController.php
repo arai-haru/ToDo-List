@@ -21,12 +21,12 @@ class FolderController extends Controller
 
       //ユーザに紐付けて保存
       Auth::user()->folders()->save($folder);
-      
+
       //インスタンスの状態をデータベースに書き込む
       $folder->save();
 
       return redirect()->route('tasks.index',[
-        'id' => $folder->id,
+        'folder' => $folder->id,
       ]);
     }
 }
